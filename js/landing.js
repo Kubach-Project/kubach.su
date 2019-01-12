@@ -54,40 +54,32 @@ class MapView {
         let bottomright_y = 38 - (tiles_height/2)
  
         for(let y = topleft_y; y >= bottomright_y; y -= 2) {
-            for(let x = topleft_x; x <= bottomright_x; x += 2) {
-
-                // keep it centered while loading (i.e if people resize their browser)
-                this.cvs = this.getCurrentViewportSize()
-                this.canvas.style.top = `-${(this.stitchedTilesSize.y/2) - (this.cvs.y/2)}px`
-                this.canvas.style.left = `-${(this.stitchedTilesSize.x/2) - (this.cvs.x/2)}px`
-    
+            for(let x = topleft_x; x <= bottomright_x; x += 2) {    
                 let tile = new Image()
 
                 let self = this
-
+                tile.crossOrigin = 'anonymous'
                 // when the image finishes loading (after we set src)
-                tile.addEventListener('load', () => {
-                        // convert global tile coords to local ones, then convert to pixels (*128)
-                        let canvas_x  = ((x - topleft_x) / 2)*128
-                        let canvas_y  = ((topleft_y - y) / 2)*128
+                tile.onload = () => {
+                    // convert global tile coords to local ones, then convert to pixels (*128)
+                    let canvas_x  = ((x - topleft_x) / 2)*128
+                    let canvas_y  = ((topleft_y - y) / 2)*128
 
-                        // draw on the canvas
-                        self.ctx.drawImage(
-                            tile, 
-                            canvas_x,
-                            canvas_y,
-                            128,
-                            128
-                        )
+                    // draw on the canvas
+                    self.ctx.drawImage(
+                        tile, 
+                        canvas_x,
+                        canvas_y,
+                        128,
+                        128
+                    )
 
-                        // on final iteration of the loop
-                        if(x >= bottomright_x && y <= bottomright_y) {
-                            // this will trigger our draw code below
-                            self.assetsLoaded = true
-                        }
-                    },
-                    false
-                )
+                    // on final iteration of the loop
+                    if(x >= bottomright_x && y <= bottomright_y) {
+                        // this will trigger our draw code below
+                        self.assetsLoaded = true
+                    }
+                }
 
                 tile.src = `http://minecraft.netsoc.co/maps/survival/tiles/world/t/3_1/z_${x}_${y}.png`
             }
@@ -103,10 +95,6 @@ class MapView {
 
     draw() {
         if(this.assetsLoaded && !this.shouldAnimate) {
-            // So, putImageData/getImageData only works on pixels that are displayed on the visible canvas
-            // this means we cannot copy our stitched image from above
-            // (if we wanted to have the image draw from the center of the viewport)
-            // so we're just gonna manipulate it with CSS positioning instead
 
             this.cvs = this.getCurrentViewportSize()
 
@@ -122,22 +110,35 @@ class MapView {
                 y: this.stitchedTilesSize.y / 2
             }
 
-            // trigger animation from now on
-            this.shouldAnimate = true
+            // canvas was preivously set to height and width of the stitched image
+            this.stitchedImage = new Image()
 
-            // also fade it in
-            this.canvas.className += " visible";
+            let self = this
+            this.stitchedImage.onload = () => {
+                self.shouldAnimate = true
+
+                 // also fade it in
+                this.canvas.className += " visible";
+            }
+
+            this.stitchedImage.src = this.canvas.toDataURL()
         }
 
         if(this.shouldAnimate) {
             // position it based on the point we're going to
             this.cvs = this.getCurrentViewportSize()
-            this.canvas.style.top = `-${(this.currentPoint.y) - (this.cvs.y/2)}px`
-            this.canvas.style.left = `-${(this.currentPoint.x) - (this.cvs.x/2)}px`
-    
+            this.canvas.width = this.cvs.x
+            this.canvas.height = this.cvs.y
+
+            this.ctx.scale(1.6,1.6)
+            this.ctx.drawImage(this.stitchedImage,
+                (-(this.currentPoint.x) + (this.cvs.x/2)),
+                (-(this.currentPoint.y) + (this.cvs.y/2))
+            )
+
             // if we're more than 185px away
             if(Math.sqrt(
-                Math.pow(this.targetPoint.x-this.currentPoint.x,2) + 
+                Math.pow(this.targetPoint.x - this.currentPoint.x,2) + 
                 Math.pow(this.targetPoint.y - this.currentPoint.y,2)) > 185) {
      
                 // bezier interpolate to our target

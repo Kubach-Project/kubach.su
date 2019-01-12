@@ -66,9 +66,7 @@ class MapView {
                 let self = this
 
                 // when the image finishes loading (after we set src)
-                tile.addEventListener(
-                    'load',
-                    () => {
+                tile.addEventListener('load', () => {
                         // convert global tile coords to local ones, then convert to pixels (*128)
                         let canvas_x  = ((x - topleft_x) / 2)*128
                         let canvas_y  = ((topleft_y - y) / 2)*128

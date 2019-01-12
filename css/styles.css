@@ -40,6 +40,10 @@ html, body {
     to { opacity: 1; top: 0; }
 }
 
+nav {
+    background-color: initial !important;
+}
+
 main {
     position: fixed;
     top: 0;
@@ -54,8 +58,10 @@ main {
 
     animation: swipe-down 2.5s;
     animation-fill-mode: forwards;
+}
 
-    margin: 4rem 0;
+main section {
+    margin: 9rem 0;
 }
 
 main section {
@@ -67,9 +73,10 @@ main h1 {
     text-align: center;
 }
 
-main a img {
+main h1 img {
     width: 100%;
 }
+
 
 .scene {
     width: 4rem;
@@ -109,7 +116,7 @@ main a img {
 .cube__face--top    { 
     background: url('../img/top.png'); 
     background-size: contain; 
-    transform: rotateX( 90deg) translateZ(2rem); 
+    transform: rotateX(90deg) translateZ(2rem); 
     filter: saturate(125%);
     box-shadow: none;
     border: none;
@@ -122,12 +129,14 @@ main a img {
 
 @keyframes spin {
     from { transform:translateZ(2rem) rotateX(-45deg) rotateY(-45deg);  }
-    to { transform: translateZ(2rem) rotateX(-45deg) rotateY(45deg) }
+    to { transform: translateZ(2rem) rotateX(-45deg) rotateY(315deg) }
 }
 
 .cube.show-iso   { 
-    animation: spin 4s;
+    animation: spin 8s;
     animation-fill-mode: forwards;
+    animation-iteration-count:infinite;
+    animation-timing-function: linear;
 
     transform: translateZ(2rem) rotateX(-45deg) rotateY(-45deg); 
 }

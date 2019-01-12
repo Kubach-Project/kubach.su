@@ -1,47 +1,85 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>NetCraft - Netsoc Minecraft</title>
-        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"/>
-        <link type="text/css" rel="stylesheet" href="css/styles.css"/>
-        <script src="js/landing.js"></script>
-    </head>
-    <body>
-        <header>
-            <canvas id="map">
-                <b>
-                    Your browser does not support the canvas tag.
-                    Please upgrade to a more modern browser :(
-                </b>
-            </canvas>
-            <section id="vignette"></section>
-        </header>
-        <main>
-            <section>   
-                <!-- credit: https://3dtransforms.desandro.com/cube -->
-                <section class="scene">
-                    <section class="cube show-iso">
-                        <div class="cube__face cube__face--front"></div>
-                        <div class="cube__face cube__face--back"></div>
-                        <div class="cube__face cube__face--right"></div>
-                        <div class="cube__face cube__face--left"></div>
-                        <div class="cube__face cube__face--top"></div>
-                        <div class="cube__face cube__face--bottom"></div>
-                    </section>
-                </section>
-                <h1>
-                    <a href="https://netsoc.co">
-                        <img src="img/logo.png" alt="Netsoc"/>
-                    </a>
-                </h1>
-                <div>
-                    <p>The Netsoc Minecraft Server has launched.</p>
-                    <p>Featuring creative & survival, shops, factions and more!</p>
-                    <p>Join us now at<br/><i>minecraft.netsoc.co!</i></p>
-                    <p><a href="http://minecraft.netsoc.co/maps/survival/" target="_blank">survival world map</a></p>
-                    <p><a href="http://minecraft.netsoc.co/maps/creative/" target="_blank">creative world map</a></p>
+<head>
+    <title>NetCraft - Netsoc Minecraft</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"/>
+    <link type="text/css" rel="stylesheet" href="css/styles.css"/>
+    <script src="js/landing.js"></script>
+</head>
+<body>
+    <header>
+        <canvas id="map">
+            <b>
+                Your browser does not support the canvas tag.
+                Please upgrade to a more modern browser :(
+            </b>
+        </canvas>
+        <section id="vignette"></section>
+    </header>
+    
+    <main>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper" style="padding-right: 5%;padding-left: 1%; background: rgba(17, 17, 17, 0.5) !important;   ">
+                    <div class="brand-logo"><img src="https://admin.netsoc.co/static/inverted-icon.png" class="responsive-img" style="height: 70px; padding: 5px;"/></div>
+                    
+                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li>
+                            <a href="https://netsoc.co/">Netsoc Home</a>
+                        </li>
+                        <li>
+                            <a href="/screenshots.html">Screenshots</a>
+                        </li>
+                        <li>
+                            <a href="http://minecraft.netsoc.co/maps/survival/" target="_blank">Survival Map</a>
+                        </li>
+                        <li>
+                            <a href="http://minecraft.netsoc.co/maps/creative/" target="_blank">Creative Map</a>
+                        </li>
+                    </ul>
+                    
+                    <ul class="side-nav" id="mobile-demo">
+                        <li>
+                            <a href="https://netsoc.co/">Netsoc Home</a>
+                        </li>
+                        <li>
+                            <a href="/screenshots.html">Screenshots</a>
+                        </li>
+                        <li>
+                            <a href="http://minecraft.netsoc.co/maps/survival/" target="_blank">Survival Map</a>
+                        </li>
+                        <li>
+                            <a href="http://minecraft.netsoc.co/maps/creative/" target="_blank">Creative Map</a>
+                        </li>
+                    </ul>
                 </div>
+            </nav>
+        </div>
+        <section>   
+            <!-- credit: https://3dtransforms.desandro.com/cube -->
+            <section class="scene">
+                <section class="cube show-iso">
+                    <div class="cube__face cube__face--front"></div>
+                    <div class="cube__face cube__face--back"></div>
+                    <div class="cube__face cube__face--right"></div>
+                    <div class="cube__face cube__face--left"></div>
+                    <div class="cube__face cube__face--top"></div>
+                    <div class="cube__face cube__face--bottom"></div>
+                </section>
             </section>
-        </main>
-    </body>
+            <h1>
+                <img src="img/logo.png" alt="Netsoc"/>
+            </h1>
+            <div>
+                <p>The Netsoc Minecraft Server has launched.</p>
+                <p>Featuring creative & survival, shops, factions and more!</p>
+                <p>Join us now at<br/><i>minecraft.netsoc.co!</i></p>
+                <p><a href="http://minecraft.netsoc.co/maps/survival/" target="_blank">survival world map</a></p>
+                <p><a href="http://minecraft.netsoc.co/maps/creative/" target="_blank">creative world map</a></p>
+            </div>
+        </section>
+    </main>
+</body>
 </html>

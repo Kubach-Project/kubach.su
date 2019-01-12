@@ -9,8 +9,6 @@ class MapView {
         this.assetsLoaded = false
         this.shouldDraw = false
         this.stitchedImage = new Image()
-
-        this.previousViewportSize = {x:0,y:0}
     }   
 
     loadAssets() {
@@ -74,11 +72,8 @@ class MapView {
                 // console.log(x,y,bottomright_y)
                 let tile = new Image()
 
-                // // see comment about row placement below
+                // see comment about row placement below
                 let self = this
-                tile.crossOrigin = 'anonymous'
-
-
                 // get canvas coordinates 
                 tile.addEventListener(
                     'load',

@@ -130,7 +130,7 @@ class MapView {
             this.canvas.width = this.cvs.x
             this.canvas.height = this.cvs.y
 
-            this.ctx.scale(1.6,1.6)
+            this.ctx.scale(1.2,1.2)
             this.ctx.drawImage(this.stitchedImage,
                 (-(this.currentPoint.x) + (this.cvs.x/2)),
                 (-(this.currentPoint.y) + (this.cvs.y/2))

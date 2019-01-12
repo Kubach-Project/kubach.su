@@ -7,19 +7,43 @@
         <script src="js/landing.js"></script>
     </head>
     <body>
-        <main>
-            <!-- <h1>
-                <a href="https://netsoc.co">
-                    <img src="img/netsoc_horizontal.png" alt="Netsoc"/>
-                </a>
-            </h1> -->
+        <header>
             <canvas id="map">
                 <b>
                     Your browser does not support the canvas tag.
                     Please upgrade to a more modern browser :(
                 </b>
             </canvas>
-            <div id="vignette"></div>
+            <section id="vignette"></section>
+        </header>
+        <main>
+            <section>   
+                <!-- credit: https://3dtransforms.desandro.com/cube -->
+                <section class="scene">
+                    <section class="cube show-iso">
+                        <div class="cube__face cube__face--front"></div>
+                        <div class="cube__face cube__face--back"></div>
+                        <div class="cube__face cube__face--right"></div>
+                        <div class="cube__face cube__face--left"></div>
+                        <div class="cube__face cube__face--top"></div>
+                        <div class="cube__face cube__face--bottom"></div>
+                    </section>
+                </section>
+                <h1>
+                    <a href="https://netsoc.co">
+                        <img src="img/netsoc_horizontal.png" alt="Netsoc"/>
+                    </a>
+                </h1>
+                <p>
+                    The Netsoc Minecraft Server has launched.<br/>
+                    Featuring creative & survival, shops, factions and more!<br/><br/>
+                    Join us now at<br/><i>minecraft.netsoc.co!</i>
+                    <br/><br/>
+                    <a href="http://minecraft.netsoc.co/maps/survival/" target="_blank">survival world map</a>
+                    <br/><br/>
+                    <a href="http://minecraft.netsoc.co/maps/creative/" target="_blank">creative world map</a>
+                </p>
+            </section>
         </main>
     </body>
 </html>

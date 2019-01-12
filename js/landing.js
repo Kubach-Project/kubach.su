@@ -3,8 +3,14 @@ class MapView {
     constructor(canvasElement) {
         this.canvas = canvasElement
         // hide the canvas until asset loading completes
-        this.canvas.style.display = 'none'
+        // this.canvas.style.display = 'none'
         this.ctx    = this.canvas.getContext('2d')
+
+        this.assetsLoaded = false
+        this.shouldDraw = false
+        this.stitchedImage = new Image()
+
+        this.previousViewportSize = {x:0,y:0}
     }   
 
     loadAssets() {
@@ -25,61 +31,141 @@ class MapView {
         // Each tile is 128x128
    
         // screen res:
-        let scr_height = window.screen.height
-        let scr_width  = window.screen.width
 
         // ideally we want like 2x as many tiles as screen res
-        let tiles_width = (scr_width*2)/128 
-        let tiles_height = (scr_height*2)/128
+        // the *2 is the zoom level 
+        let tiles_width = (4096/128)*2
+        let tiles_height = (2048/128)*2
+
+
+        // note again zoom level 2
+        this.tilesDrawWidth = (tiles_width*128)/2
+        this.tilesDrawHeight = (tiles_height*128)/2
+
+
+        // we're gonna keep the camera focused on the center of the tile image
+        this.currentPoint = {
+            x: this.tilesDrawWidth / 2,
+            y: this.tilesDrawHeight / 2
+        }
+
         
-        console.log(tiles_width,tiles_height)
+        // so we can draw each of the tiles onto the canvas and stitch them
+        this.canvas.width = this.tilesDrawWidth
+        this.canvas.height = this.tilesDrawHeight
 
-        // make sure they're even as we're using zoom level 1
-        tiles_width = tiles_width - (tiles_width%2)
-        tiles_height = tiles_height - (tiles_height%2)
-    
+        // the top left, bottom right in tile coordinates
+        let topleft_x = 100 - (tiles_width/2)
+        let topleft_y = 38 + (tiles_height/2)
 
-        // Okay so we're centering around 100,40 so we need to get tiles at either side of this
-        this.requests = { }
-        for(let y = 100 - (tiles_width/2); y < 100 + (tiles_height/2); y += 2){
-            for(let x = 40 - (tiles_height)/2; x < 40 + (tiles_height/2); x += 2){
-                
-                let request = new XMLHttpRequest()
-                request.responseType = 'arraybuffer'
-                request.open(
-                    'GET',
-                    `http://minecraft.netsoc.co/maps/survival/tiles/world/t/3_1/z_${x}_${y}`,
-                    true
-                )
-                
-                
-                request.onreadystatechange = () => {
-                    if(request.readyState === 4 && request.status === 200) {
-                        let image = new Image();
-                        
+        let bottomright_x = 100 + (tiles_width/2)
+        let bottomright_y = 38 - (tiles_height/2)
+ 
 
-                        image.onload = () => {
-                            
+        for(let y = topleft_y; y >= bottomright_y; y -= 2) {
+            for(let x = topleft_x; x <= bottomright_x; x += 2) {
+
+                // keep it centered while loading (i.e if people resize their browser)
+                this.cvs = this.getCurrentViewportSize()
+                this.canvas.style.top = `-${(this.tilesDrawHeight/2) - (this.cvs.y/2)}px`
+                this.canvas.style.left = `-${(this.tilesDrawWidth/2) - (this.cvs.x/2)}px`
+        
+
+                // console.log(x,y,bottomright_y)
+                let tile = new Image()
+
+                // // see comment about row placement below
+                let self = this
+                tile.crossOrigin = 'anonymous'
+
+
+                // get canvas coordinates 
+                tile.addEventListener(
+                    'load',
+                    () => {
+                        let canvas_x  = ((x - topleft_x) / 2)*128
+                        let canvas_y  = ((topleft_y - y) / 2)*128
+                        self.ctx.drawImage(
+                            tile, 
+                            canvas_x,
+                            canvas_y,
+                            128,
+                            128
+                        )
+
+                        // final iteration
+                        if(x >= bottomright_x && y <= bottomright_y) {
+                            self.assetsLoaded = true
                         }
-                        // https://stackoverflow.com/a/42929211
-                        image.src = 'data:image/png;base64,' + btoa(String.fromCharCode.apply(null, new Uint8Array(request.response)))
-                        console.log(xhr.responseText);
-                    }
-                }
+                    },
+                    false
+                )
 
-                request.send()
-                this.requests.push(request)
+                tile.src = `http://minecraft.netsoc.co/maps/survival/tiles/world/t/3_1/z_${x}_${y}.png`
+
             }
         }
 
         //http = new XMLHttpRequest()
     }
     
-    draw() {
-
-        window.requestAnimationFrame(MapView.draw.bind(this))
+    getCurrentViewportSize() {
+        return { 
+            x: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
+            y: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+        }
     }
 
+    draw() {
+        
+        if(this.assetsLoaded && !this.shouldAnimate) {
+            // So, putImageData/getImageData only works on pixels that are displayed on the visible canvas
+            // this means we cannot copy our stitched image from above
+            // (if we wanted to have the image draw from the center of the viewport)
+            // so we're just gonna manipulate it with CSS positioning instead
+
+            this.targetPoint = {
+                x: Math.floor(Math.random()*this.tilesDrawWidth),
+                y: Math.floor(Math.random()*this.tilesDrawHeight)
+            }
+            console.log(this.targetPoint)
+            this.currentPoint = {
+                x: this.tilesDrawWidth / 2,
+                y: this.tilesDrawHeight / 2
+            }
+            this.ratio = 0
+            this.shouldAnimate = true
+            this.canvas.className += " visible";
+        }
+
+        if(this.shouldAnimate) {
+            this.cvs = this.getCurrentViewportSize()
+            this.canvas.style.top = `-${(this.currentPoint.y) - (this.cvs.y/2)}px`
+            this.canvas.style.left = `-${(this.currentPoint.x) - (this.cvs.x/2)}px`
+    
+
+            if(this.ratio < 0.98) {
+                console.log('beziering')
+                this.currentPoint = bezier(this.currentPoint, 
+                    { x: this.currentPoint.x + 20, y: this.currentPoint.y - 20} , 
+                        this.targetPoint, this.ratio)
+                this.ratio += 0.0001
+            } else {
+
+            }
+        }
+
+        window.requestAnimationFrame(mapView.draw.bind(this))
+    }
+
+}
+
+function bezier(startXY, controlXY, endXY, ratio) {
+    // i imple
+    return {
+        x: Math.pow((1-ratio),2) * startXY.x + (2 * (1-ratio) * ratio * controlXY.x) + Math.pow(ratio,2) * endXY.x,
+        y: Math.pow((1-ratio),2) * startXY.y + (2 * (1-ratio) * ratio * controlXY.y) + Math.pow(ratio,2) * endXY.y
+    }
 }
 
 window.onload = function() {
@@ -88,6 +174,6 @@ window.onload = function() {
     if(canvasElement) {
         mapView = new MapView(canvasElement)
         mapView.loadAssets()
-                //window.requestAnimationFrame(MapView.draw.bind(mapView))
+        window.requestAnimationFrame(mapView.draw.bind(mapView))
     }
 }

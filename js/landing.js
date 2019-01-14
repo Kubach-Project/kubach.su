@@ -146,7 +146,7 @@ class MapView {
                     this.currentPoint, 
                     // I thought I could use a control point with a slight x,y offset,
                     // unfortunately this pushes the canvas out of bounds :(
-                    { x: this.currentPoint.x, y: this.currentPoint.y }, 
+                    { x: this.currentPoint.x , y: this.currentPoint.y }, 
                     this.targetPoint, 0.025
                 )
 

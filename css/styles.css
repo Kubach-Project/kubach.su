@@ -1,20 +1,20 @@
 
 /* resets */
 html, body {
-    overflow: hidden;
     background: black;
     margin: 0;
     padding: 0;
-
+    overflow-x: hidden;
     font-size: 16px;
 }
 
 #map {
-    position: relative;
+    position: fixed;
+    top: 0;
     margin: 0;
     padding: 0;
     transform: scale(1.4);
-    z-index: 1;
+    z-index: -1;
     filter: saturate(125%);
 
     opacity: 0;
@@ -45,12 +45,9 @@ nav {
 }
 
 main {
-    position: fixed;
-    top: 0;
-    left: 0;
     z-index: 3;
     width: 100vw;
-    height: 100vh;
+    overflow-x: hidden;
 
     animation: swipe-down 2.5s;
     animation-fill-mode: forwards;
@@ -76,20 +73,19 @@ main > section > div img {
 
 main > section > div {
     text-align: center;
-    overflow: scroll;
     max-height: 50%;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
-}
+/*} */
 
 .scene {
-    width: 4rem;
-    height: 4rem;
+    width: 5rem;
+    height: 5rem;
     perspective: 1200px;
-    margin: -0.5rem auto;
+    margin: 0.25rem auto;
     opacity: 1;
     filter: hue-rotate(10deg) brightness(95%) drop-shadow(0.15rem 0.15rem 0.6rem black);
 }
@@ -104,8 +100,8 @@ main > section > div {
   
 .cube__face {
     position: absolute;
-    width: 4rem;    
-    height: 4rem;
+    width: 5rem;    
+    height: 5rem;
     background-color: rgba(255,215,0,0.15);
     background: url('../img/block.png');
     filter: saturate(115%);
@@ -114,24 +110,19 @@ main > section > div {
     opacity: 1;
 }
 
-.cube__face--front  { transform: rotateY(  0deg) translateZ(2rem); }
-.cube__face--right  { transform: rotateY( 90deg) translateZ(2rem); }
-.cube__face--back   { transform: rotateY(180deg) translateZ(2rem); }
-.cube__face--left   { transform: rotateY(-90deg) translateZ(2rem); }
-.cube__face--bottom { transform: rotateX(-90deg) translateZ(2rem); }
+.cube__face--front  { transform: rotateY(  0deg) translateZ(2.5rem); }
+.cube__face--right  { transform: rotateY( 90deg) translateZ(2.5rem); }
+.cube__face--back   { transform: rotateY(180deg) translateZ(2.5rem); }
+.cube__face--left   { transform: rotateY(-90deg) translateZ(2.5rem); }
+.cube__face--bottom { transform: rotateX(-90deg) translateZ(2.5rem); }
 
 .cube__face--top    { 
     background: url('../img/top.png'); 
     background-size: contain; 
-    transform: rotateX(90deg) translateZ(2rem); 
+    transform: rotateX(90deg) translateZ(2.5rem); 
     filter: saturate(125%);
     box-shadow: none;
     border: none;
-}
-
-.cube.show-iso   { 
-    animation: swipeDown 1s;
-    animation-fill-mode: forwards;
 }
 
 @keyframes spin {
@@ -174,4 +165,16 @@ p a {
     color: white;
     font-weight: 600;
     font-size: 1rem;
+}
+
+#screenshots {
+    padding: 4em;
+}
+
+#screenshots h1 {
+    padding-bottom: 1em;
+}
+
+#screenshots img {
+    padding-bottom: 1em;
 }

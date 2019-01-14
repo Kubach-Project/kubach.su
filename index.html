@@ -9,28 +9,15 @@
 </head>
 <body>
     <header>
-        <canvas id="map">
-            <b>
-                Your browser does not support the canvas tag.
-                Please upgrade to a more modern browser :(
-            </b>
-        </canvas>
-        <section id="vignette"></section>
-    </header>
-    
-    <main>
         <div class="navbar-fixed">
             <nav>
-                <div class="nav-wrapper" style="padding-right: 5%;padding-left: 1%; background: rgba(17, 17, 17, 0.5) !important;   ">
+                <div class="nav-wrapper" style="padding-bottom: 2px; padding-right: 5%; padding-left: 1%; background: rgba(17, 17, 17, 0.5) !important;   ">
                     <div class="brand-logo"><img src="https://admin.netsoc.co/static/inverted-icon.png" class="responsive-img" style="height: 70px; padding: 5px;"/></div>
                     
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                     <ul class="right hide-on-med-and-down">
                         <li>
-                            <a href="https://netsoc.co/">Netsoc Home</a>
-                        </li>
-                        <li>
-                            <a href="screenshots.html">Screenshots</a>
+                            <a href="#screenshots">Screenshots</a>
                         </li>
                         <li>
                             <a href="http://minecraft.netsoc.co/maps/survival/" target="_blank">Survival Map</a>
@@ -38,12 +25,12 @@
                         <li>
                             <a href="http://minecraft.netsoc.co/maps/creative/" target="_blank">Creative Map</a>
                         </li>
+                        <li>
+                            <a href="https://netsoc.co/">Netsoc</a>
+                        </li>
                     </ul>
                     
                     <ul class="side-nav" id="mobile-demo">
-                        <li>
-                            <a href="https://netsoc.co/">Netsoc Home</a>
-                        </li>
                         <li>
                             <a href="/screenshots.html">Screenshots</a>
                         </li>
@@ -53,10 +40,23 @@
                         <li>
                             <a href="http://minecraft.netsoc.co/maps/creative/" target="_blank">Creative Map</a>
                         </li>
+                        <li>
+                            <a href="https://netsoc.co/">Netsoc</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
         </div>
+        <section id="vignette"></section>
+    </header>
+    
+    <main>
+        <canvas id="map">
+            <b>
+                Your browser does not support the canvas tag.
+                Please upgrade to a more modern browser :(
+            </b>
+        </canvas>
         <section>   
             <!-- credit: https://3dtransforms.desandro.com/cube -->
             <section class="scene">
@@ -76,8 +76,13 @@
                 <p>The Netsoc Minecraft Server has launched.</p>
                 <p>Featuring creative & survival, shops, factions and more!</p>
                 <p>Join us now at<br/><i>minecraft.netsoc.co!</i></p>
-                <p><a href="http://minecraft.netsoc.co/maps/survival/" target="_blank">survival world map</a></p>
-                <p><a href="http://minecraft.netsoc.co/maps/creative/" target="_blank">creative world map</a></p>
+            </div>
+        </section>
+        <section id="screenshots">
+            <h1><img src="img/screenshots.png"/></h1>
+            <div id="wrapper">
+                <img src="img/portal.jpg"/>
+                <img src="img/jail.jpg"/>
             </div>
         </section>
     </main>

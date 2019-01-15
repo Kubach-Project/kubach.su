@@ -81,7 +81,7 @@ class MapView {
                     }
                 }
 
-                tile.src = `http://minecraft.netsoc.co/maps/survival/tiles/world/t/3_1/z_${x}_${y}.png`
+                tile.src = `https://minecraft.netsoc.co/maps/survival/tiles/world/t/3_1/z_${x}_${y}.png`
             }
         }
     }

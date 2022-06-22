@@ -81,7 +81,7 @@ class MapView {
                     }
                 }
 
-                tile.src = `https://map.kubach.su/tiles/MirKubacha/flat/0_0/z_${x}_${y}.png`
+                tile.src = `https://map-infinity.kubach.su/tiles/MirKubacha/flat/0_0/z_${x}_${y}.png`
             }
         }
     }

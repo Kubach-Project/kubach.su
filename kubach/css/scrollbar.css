@@ -1,0 +1,82 @@
+/* Variables */
+:root {
+    --scrollbar-size: .375rem;
+    --scrollbar-minlength: 1.5rem; /* Minimum length of scrollbar thumb (width of horizontal, height of vertical) */
+    --scrollbar-ff-width: thin; /* FF-only accepts auto, thin, none */
+    --scrollbar-track-color: transparent;
+    --scrollbar-color: rgba(0,0,0,.2);
+    --scrollbar-color-hover: rgba(0,0,0,.3);
+    --scrollbar-color-active: rgb(0,0,0);
+}
+
+.layout-cell {
+    overscroll-behavior: contain;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    scrollbar-width: var(--scrollbar-ff-width);
+}
+
+/* This class controls what elements have the new fancy scrollbar CSS */
+.layout-scrollbar {
+    scrollbar-color: var(--scrollbar-color) var(--scrollbar-track-color);
+}
+.layout-scrollbar::-webkit-scrollbar {
+    height: var(--scrollbar-size);
+    width: var(--scrollbar-size);
+}
+.layout-scrollbar::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track-color);
+}
+.layout-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-color);
+    border-radius: 3px;
+}
+.layout-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-color-hover);
+}
+.layout-scrollbar::-webkit-scrollbar-thumb:active {
+    background-color: var(--scrollbar-color-active);
+}
+.layout-scrollbar::-webkit-scrollbar-thumb:vertical {
+    min-height: var(--scrollbar-minlength);
+}
+.layout-scrollbar::-webkit-scrollbar-thumb:horizontal {
+    min-width: var(--scrollbar-minlength);
+}
+/* .layout-scrollbar::-webkit-scrollbar-corner {
+  display: none;
+}
+.layout-scrollbar::-webkit-scrollbar-button {
+  display: none;
+}
+ */
+
+/* Demo Styles */
+html,
+body {
+    min-height: 100%;
+    margin: 0;
+}
+.layout-cell {
+    padding: 1em;
+    max-height: 50vh;
+    margin: 5vw;
+    border: 2px solid rgba(0,0,0,.1);
+    background-color: #f9f9f9;
+}
+.component {
+    font-family: sans-serif;
+    text-align: center;
+    outline: 1px dotted rgba(0,0,0,.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 15em;
+}
+.component:not(:first-child) {
+    margin-top: 1em;
+}
+.component ~ .component:last-child {
+    margin-bottom: 1em;
+}

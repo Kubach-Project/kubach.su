@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title id="title">Kubach Maps hub</title>
+		<style>
+		#map {
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    border: 0;
+		    height: 100%;
+		    width: 100%; 
+		}
+		</style>
+	</head>
+	<body>
+		<iframe id="map" src="" loading="eager">
+		</iframe>
+		<script type="text/javascript">
+			const params = new Proxy(new URLSearchParams(window.location.search), {
+			  get: (searchParams, prop) => searchParams.get(prop),
+			});
+			iframe_id = document.getElementById("map")
+			title_id = document.getElementById("title")
+			switch (params.map){
+				case "classic":
+					iframe_id.src = "https://map-classic.kubach.su"
+					title_id.textContent  = "Kubach Classic"
+					break
+				case "creative":
+					iframe_id.src = "https://map-creative.kubach.su"
+					title_id.textContent = "Kubach Creative"
+					break
+				case "infinity":
+					iframe_id.src = "https://map-infinity.kubach.su"
+					title_id.textContent  = "Kubach Infinity"
+					break
+				default:
+					iframe_id.src = "https://map-classic.kubach.su"
+					title_id.textContent  = "Kubach Classic"
+					// window.location.replace("https://kubach.su");
+			}
+		</script>
+	</body>
+</html>

@@ -1,2 +1,1 @@
-# minecraft-landing
-Landing page for NetCraft / Netsoc Minecraft
+# kubach.su landing page

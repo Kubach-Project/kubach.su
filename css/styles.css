@@ -102,8 +102,7 @@ main > section > div {
     position: absolute;
     width: 5rem;    
     height: 5rem;
-    background-color: rgba(255,215,0,0.15);
-    background: url('../img/block.png');
+    background: rgba(255, 215, 0, 0.15) url('../img/block.png');
     filter: saturate(115%);
 
     background-size: contain;

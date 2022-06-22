@@ -81,7 +81,7 @@ class MapView {
                     }
                 }
 
-                tile.src = `https://minecraft.netsoc.co/maps/survival/tiles/world/t/3_1/z_${x}_${y}.png`
+                tile.src = `https://map.kubach.su/tiles/MirKubacha/flat/0_0/z_${x}_${y}.png`
             }
         }
     }

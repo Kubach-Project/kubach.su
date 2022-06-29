@@ -9,7 +9,7 @@ class MapView {
     }   
 
     loadAssets() {
-        /**
+        /*
          * Our end goal is to get a stitched image of a map view on the canvas
          * We will then be able to transform it as we wish
          * 
@@ -36,7 +36,7 @@ class MapView {
             y: (tiles_height*128)/2
         }
 
-        // we're gonna keep the camera focused on the center of all the tiles we get
+        // we're going to keep the camera focused in the center of all the tiles we get
         this.currentPoint = {
             x: this.stitchedTilesSize.x / 2,
             y: this.stitchedTilesSize.y / 2
@@ -47,14 +47,14 @@ class MapView {
         this.canvas.height = this.stitchedTilesSize.y
 
         // the top left, bottom right in tile coordinates, our centre point is (100,38)
-        let topleft_x = 100 - (tiles_width/2)
-        let topleft_y = 38 + (tiles_height/2)
+        let topLeft_x = 100 - (tiles_width/2)
+        let topLeft_y = 38 + (tiles_height/2)
 
-        let bottomright_x = 100 + (tiles_width/2)
-        let bottomright_y = 38 - (tiles_height/2)
+        let bottomRight_x = 100 + (tiles_width/2)
+        let bottomRight_y = 38 - (tiles_height/2)
  
-        for(let y = topleft_y; y >= bottomright_y; y -= 2) {
-            for(let x = topleft_x; x <= bottomright_x; x += 2) {    
+        for(let y = topLeft_y; y >= bottomRight_y; y -= 2) {
+            for(let x = topLeft_x; x <= bottomRight_x; x += 2) {    
                 let tile = new Image()
 
                 let self = this
@@ -62,8 +62,8 @@ class MapView {
                 // when the image finishes loading (after we set src)
                 tile.onload = () => {
                     // convert global tile coords to local ones, then convert to pixels (*128)
-                    let canvas_x  = ((x - topleft_x) / 2)*128
-                    let canvas_y  = ((topleft_y - y) / 2)*128
+                    let canvas_x  = ((x - topLeft_x) / 2)*128
+                    let canvas_y  = ((topLeft_y - y) / 2)*128
 
                     // draw on the canvas
                     self.ctx.drawImage(
@@ -75,7 +75,7 @@ class MapView {
                     )
 
                     // on final iteration of the loop
-                    if(x >= bottomright_x && y <= bottomright_y) {
+                    if(x >= bottomRight_x && y <= bottomRight_y) {
                         // this will trigger our draw code below
                         self.assetsLoaded = true
                     }
@@ -93,7 +93,7 @@ class MapView {
         }
     }
 
-    draw() {
+    draw(){
         if(this.assetsLoaded && !this.shouldAnimate) {
 
             this.cvs = this.getCurrentViewportSize()
@@ -104,13 +104,13 @@ class MapView {
                 y: (this.cvs.y/2)+Math.floor(Math.random()*(this.stitchedTilesSize.y-this.cvs.y))
             }
 
-            // we're gonna start from the center of the stitched tile image
+            // we're going to start from the center of the stitched tile image
             this.currentPoint = {
                 x: this.stitchedTilesSize.x / 2,
                 y: this.stitchedTilesSize.y / 2
             }
 
-            // canvas was preivously set to height and width of the stitched image
+            // canvas was previously set to height and width of the stitched image
             this.stitchedImage = new Image()
 
             let self = this
@@ -153,7 +153,7 @@ class MapView {
             } else {
                 // if we reached our destination 
 
-                // pick a new random (make sure its a good distance away like 250px
+                // pick a new random (make sure it's a good distance away like 250px
                 while(Math.sqrt(
                     Math.pow(this.targetPoint.x-this.currentPoint.x,2) + 
                     Math.pow(this.targetPoint.y - this.currentPoint.y,2)) < 350) {
@@ -170,7 +170,7 @@ class MapView {
     }
 }
 
-// bezier interp between 2 x,y coordinates with a control point
+// bezier inter between 2 x,y coordinates with a control point
 function bezier(startXY, controlXY, endXY, ratio) {
     return {
         x: Math.pow((1-ratio),2) * startXY.x + (2 * (1-ratio) * ratio * controlXY.x) + Math.pow(ratio,2) * endXY.x,
@@ -179,9 +179,9 @@ function bezier(startXY, controlXY, endXY, ratio) {
 }
 
 window.onload = function() {
-    canvasElement = document.getElementById("map")
+    let canvasElement = document.getElementById("map")
 
-    if(canvasElement) {
+    if (canvasElement) {
         mapView = new MapView(canvasElement)
         mapView.loadAssets()
         window.requestAnimationFrame(mapView.draw.bind(mapView))

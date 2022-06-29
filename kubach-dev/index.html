@@ -3,179 +3,147 @@
 <head>
     <title>Kubach Project</title>
     <meta charset="utf-8">
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" integrity="sha512-UJfAaOlIRtdR+0P6C3KUoTDAxVTuy3lnSXLyLKlHYJlcSU8Juge/mjeaxDNMlw9LgeIotgz5FP8eUQPhX1q10A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="css/styles.css"/>
-    <link type="text/css" rel="stylesheet" href="css/scrollbar.css"/>
-    <link type="text/css" rel="stylesheet" href="css/spinner.css"/>
+    <link type="text/css" rel="stylesheet" href="css/cube.css"/>
+    <link type="text/css" rel="stylesheet" href="css/map.css"/>
     <link rel="shortcut icon" href="https://map.kubach.su/images/dynmap.ico">
-    <!-- Yandex.Metrika counter -->
-    <!--suppress JSUnresolvedFunction, CommaExpressionJS, JSValidateTypes, SpellCheckingInspection -->
-    <script type="text/javascript" >
-       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-       ym(88868702, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true,
-            webvisor:true
-       });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/88868702" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
-    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-H2CCH0WJJG"></script>
+    <!--suppress JSUnresolvedFunction, CommaExpressionJS, JSValidateTypes, SpellCheckingInspection -->
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+        const host = "dev.kubach.su";
+        const googleTag = [88868702, "G-H2CCH0WJJG"];
 
-        gtag('config', 'G-H2CCH0WJJG');
+        const yandexMetrika = () => {
+            (function(m,e,t,r,i,k,a){m[i]=m[i]|| function(){(m[i].a=m[i].a||[]).push(arguments)};
+                m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        }
+
+        const googleAnalytics = () => {
+            ym(googleTag[0], "init", {
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true,
+                webvisor:true
+            });
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', googleTag[1]);
+        }
+
+        if (window.location.host === host){
+            yandexMetrika();
+            googleAnalytics();
+        }
     </script>
-    <!-- /Google Analytics -->
 </head>
-<body class="layout-scrollbar">
-    <div id="spinner" style="text-align: center">
-        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+<body>
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand text-light" href="#">Kubach project</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler1" aria-controls="navbarToggler1" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#screenshots" style="padding-right: 15px">Фотографии</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Сервера
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+<!--                        <li><a class="dropdown-item text-light" href="https://classic.kubach.su/">Classic</a></li>-->
+                        <li><a class="dropdown-item text-light" href="https://infinity.kubach.su/">Infinity</a></li>
+<!--                        <li><a class="dropdown-item text-light" href="https://creative.kubach.su/">Creative</a></li>-->
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Карты
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+<!--                        <li><a class="dropdown-item text-light" href="https://map.kubach.su/?map=classic">Classic</a></li>-->
+                        <li><a class="dropdown-item text-light" href="https://map.kubach.su/?map=infinity">Infinity</a></li>
+<!--                        <li><a class="dropdown-item text-light" href="https://map.kubach.su/?map=creative">Creative</a></li>-->
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" style="padding-right: 40px" href="https://vk.com/kubachproject">Kubach Project</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div id="page" class="layout-scrollbar">
-        <header>
-            <div class="navbar-fixed">
+</nav>
 
-                <ul id="dropdown-maps" class="dropdown-content" style="padding-top: 60px;background: rgba(17,17,17,0.7) !important;">
-                    <li class="divider"></li>
-                    <li><a href="https://map.kubach.su/?map=classic">Classic</a></li>
-                    <li><a href="https://map.kubach.su/?map=infinity">Infinity</a></li>
-                    <li><a href="https://map.kubach.su/?map=creative">Creative</a></li>
-                </ul>
+<main>
 
-                <ul id="dropdown-servers" class="dropdown-content" style="padding-top: 60px;background: rgba(17,17,17,0.7) !important;">
-                    <li class="divider"></li>
-                    <li><a href="https://classic.kubach.su/">Classic</a></li>
-                    <li><a href="https://infinity.kubach.su/">Infinity</a></li>
-                    <li><a href="https://creative.kubach.su/">Creative</a></li>
-                </ul>
+        <canvas id="map">
+            <b>
+                Your browser does not support the canvas tag.
+                Please upgrade to a more modern browser :(
+            </b>
+        </canvas>
 
-                <nav>
-                    <div class="nav-wrapper" style="padding-bottom: 2px; padding-right: 5%; padding-left: 1%; background: rgba(17, 17, 17, 0.5) !important;">
-
-                        <a href="https://kubach.su/" class="brand-logo">KubPrj</a>
-
-<!--                        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>-->
-
-                        <ul class="right hide-on-med-and-down">
-                            <li><a href="#screenshots">Фотографии</a></li>
-                            <li><a class="dropdown-trigger" href="#" data-target="dropdown-servers">Сервера<i class="material-icons right">arrow_drop_down</i></a></li>
-                            <li><a class="dropdown-trigger" href="#" data-target="dropdown-maps">Карты<i class="material-icons right">arrow_drop_down</i></a></li>
-                            <li><a href="https://vk.com/kubachproject">Kubach Project</a></li>
-                        </ul>
-
-                    </div>
-                </nav>
-
-<!--                <ul class="sidenav" id="mobile-demo">-->
-<!--                    <li>-->
-<!--                        <a href="https://map.kubach.su/" target="_blank">Map: Infinity</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a href="https://vk.com/kubachproject">Kubach Project</a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-
-            </div>
-        </header>
-        <main>
-            <canvas id="map">
-                <b>
-                    Your browser does not support the canvas tag.
-                    Please upgrade to a more modern browser :(
-                </b>
-            </canvas>
-            <section>
-                <!-- credit: https://3dtransforms.desandro.com/cube -->
-                <section class="scene">
-                    <section class="cube show-iso">
-                        <div class="cube__face cube__face--front"></div>
-                        <div class="cube__face cube__face--back"></div>
-                        <div class="cube__face cube__face--right"></div>
-                        <div class="cube__face cube__face--left"></div>
-                        <div class="cube__face cube__face--top"></div>
-                        <div class="cube__face cube__face--bottom"></div>
-                    </section>
+        <section class="fw-normal">
+            <!-- credit: https://3dtransforms.desandro.com/cube -->
+            <section class="scene">
+                <section class="cube show-iso">
+                    <div class="cube__face cube__face--front"></div>
+                    <div class="cube__face cube__face--back"></div>
+                    <div class="cube__face cube__face--right"></div>
+                    <div class="cube__face cube__face--left"></div>
+                    <div class="cube__face cube__face--top"></div>
+                    <div class="cube__face cube__face--bottom"></div>
                 </section>
-                <h2 style="color: white; text-align: center;">
-                    Kubach
-                </h2>
-                <div>
-                    <p>Kubach project Открылся!</p>
-                    <p>
-                        По всем вопросам обращайтесь в группу вк: <br/>
-                        <a href="https://vk.me/kubachproject">vk.com/kubachproject</a>
-                    </p>
+            </section>
+
+            <h1>Kubach</h1>
+
+            <div>
+                <p>Kubach project Открылся!</p>
+                <p>
+                    По всем вопросам обращайтесь в группу вк: <br/>
+                    <a href="https://vk.me/kubachproject">KubachProject</a>
+                </p>
+                <br/>
+                <p>Присоединяйся на версии 1.18.2:
                     <br/>
-                    <p>Присоединяйся на версии 1.18.2:
-                        <br/>
-                        <i>mc.kubach.su!</i>
-                    </p>
-                    <br/><br/>
-                    <p>Сервер <i>Classic</i>: Собираем на хост..&nbsp;&nbsp;&nbsp;</p>
-                    <p>Сервер <i>Infinity</i>: Проходка 75 рублей!</p>
-                    <p>Сервер <i>Creative</i>: На подходе!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                </div>
-            </section>
-            <section id="screenshots">
-                <h1>
-                    <img src="img/screenshots.png" alt="no-alt"/>
-                </h1>
-                <div id="wrapper">
-                    <img src="img/day.png" alt="no-alt"/>
-                    <img src="img/kycb-shop.png" alt="no-alt"/>
-                    <img src="img/maxim-st-home.png" alt="no-alt"/>
-                    <img src="img/kycb-under.png" alt="no-alt"/>
-                    <img src="img/night.png" alt="no-alt"/>
-                </div>
-            </section>
+                    <i>mc.kubach.su!</i>
+                </p>
+                <br/><br/>
+                <p>Сервер <i>Classic</i>: Собираем на хост..&nbsp;&nbsp;&nbsp;</p>
+                <p>Сервер <i>Infinity</i>: Проходка 75 рублей!</p>
+                <p>Сервер <i>Creative</i>: На подходе!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            </div>
 
-            <footer class="page-footer" style="padding-bottom: 2px; padding-right: 5%; padding-left: 1%; background: rgba(17, 17, 17, 0.5) !important;">
-                <div class="container">
-                    <div class="row">
-                        <div class="col l6 s12">
-                            <h5 class="white-text">О проекте</h5>
-                            <p class="grey-text text-lighten-4">Здесь могла бы быть ваша реклама, но админ не придумал текст.</p>
-                            <p class="grey-text text-lighten-4">А вообще у нас лучший ванильно-экономический сервер по игре Minecraft.</p>
-                        </div>
-                        <div class="col l4 offset-l2 s12">
-                            <h5 class="white-text">Ссылки</h5>
-                            <ul>
-                                <li><a class="grey-text text-lighten-5" href="https://vk.com/kubachproject">Группа ВК</a></li>
-                                <li><a class="grey-text text-lighten-5" href="https://github.com/Kubach-Project">GitHub</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                    <div class="container" style="text-align: center">
-                        2022 © kubach.su
-                    </div>
-            </footer>
+        </section>
 
-        </main>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" integrity="sha512-NiWqa2rceHnN3Z5j6mSAvbwwg3tiwVNxiAQaaSMSXnRRDh5C2mk/+sKQRw8qjV1vN4nf8iK2a0b048PnHbyx+Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="js/map.js"></script>
-    <script>
-        $(".dropdown-trigger").dropdown();
-        $(".sidenav").sidenav();
-        window.animation = function () {
-            document.getElementById("spinner").innerHTML = "<div class=\"lds-circle\"><div></div></div>";
-        }
-        window.onanimationend = function (){
-            document.getElementById("spinner").innerHTML = "";
+        <section id="screenshots">
+            <h1>
+                <img class="img-fluid" src="img/screenshots.png" alt="no-alt"/>
+            </h1>
+            <div id="wrapper">
+                <img class="img-fluid" src="img/day.png" alt="no-alt"/>
+                <img class="img-fluid" src="img/kycb-shop.png" alt="no-alt"/>
+                <img class="img-fluid" src="img/maxim-st-home.png" alt="no-alt"/>
+                <img class="img-fluid" src="img/kycb-under.png" alt="no-alt"/>
+                <img class="img-fluid" src="img/night.png" alt="no-alt"/>
+            </div>
+        </section>
 
-        }
-    </script>
+        <footer>
+            2022 © kubach.su
+        </footer>
+
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="js/map.js"></script>
 </body>
 </html>

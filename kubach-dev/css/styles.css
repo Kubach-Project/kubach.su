@@ -8,31 +8,9 @@ html, body {
     font-size: 16px;
 }
 
-#map {
-    position: fixed;
-    top: 0;
-    margin: 0;
-    padding: 0;
-    transform: scale(1.4);
-    z-index: -1;
-    filter: saturate(125%);
-
-    opacity: 0;
-    transition: opacity 2s;
-}
-
-#map.visible {
-    opacity: 1;
-}
-
-#vignette {
-    position: fixed;
-    top: 0;
-    left: 0;
-    box-shadow: inset 0 0 120px rgba(0,0,0,0.88);
-    z-index: 2;
-    width: 100vw;
-    height: 100vh;
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent; /* make scrollbar transparent */
 }
 
 @keyframes swipe-down {
@@ -41,7 +19,18 @@ html, body {
 }
 
 nav {
-    background-color: initial !important;
+    background: rgba(17,17,17,0.7) !important;
+}
+.navbar-brand {
+    padding-left: 40px;
+}
+
+.nav-link{
+    padding-right: 15px;
+}
+
+.dropdown-menu{
+    background: rgba(17,17,17,0.7) !important;
 }
 
 main {
@@ -52,20 +41,24 @@ main {
     animation: swipe-down 2.5s;
     animation-fill-mode: forwards;
 }
-
 main section {
     margin: 9rem auto;
     max-width: 90%;
 }
 
 main h1 {
+    font-size: 3.3rem;
     margin: 0 auto;
     text-align: center;
+    color: white;
+    padding-top: 40px;
+    padding-bottom: 30px;
 }
 
-main h1 img {
-    width: 40%;
-}
+/* Пока что у меня нет норм лого */
+/*main h1 img {*/
+/*    width: 40%;*/
+/*}*/
 
 main > section > div img {
     width: 70%;
@@ -74,73 +67,6 @@ main > section > div img {
 main > section > div {
     text-align: center;
     max-height: 50%;
-}
-
-/* ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent; /* make scrollbar transparent */
-/*} */
-
-.scene {
-    width: 5rem;
-    height: 5rem;
-    perspective: 1200px;
-    margin: 0.25rem auto;
-    opacity: 1;
-    filter: hue-rotate(10deg) brightness(95%) drop-shadow(0.15rem 0.15rem 0.6rem black);
-}
-  
-/* credit: https://3dtransforms.desandro.com/cube */
-.cube {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-}
-  
-.cube__face {
-    position: absolute;
-    width: 5rem;    
-    height: 5rem;
-    background: rgba(255, 215, 0, 0.15) url('../img/block.png');
-    filter: saturate(115%);
-
-    background-size: contain;
-    opacity: 1;
-}
-
-.cube__face--front  { transform: rotateY(  0deg) translateZ(2.5rem); }
-.cube__face--right  { transform: rotateY( 90deg) translateZ(2.5rem); }
-.cube__face--back   { transform: rotateY(180deg) translateZ(2.5rem); }
-.cube__face--left   { transform: rotateY(-90deg) translateZ(2.5rem); }
-.cube__face--bottom { transform: rotateX(-90deg) translateZ(2.5rem); }
-
-.cube__face--top    { 
-    background: url('../img/top.png'); 
-    background-size: contain; 
-    transform: rotateX(90deg) translateZ(2.5rem); 
-    filter: saturate(125%);
-    box-shadow: none;
-    border: none;
-}
-
-@keyframes spin {
-    from { transform:translateZ(2rem) rotateX(-45deg) rotateY(-45deg);  }
-    to { transform: translateZ(2rem) rotateX(-45deg) rotateY(315deg) }
-}
-
-.cube.show-iso   { 
-    animation: spin 8s;
-    animation-fill-mode: forwards;
-    animation-iteration-count:infinite;
-    animation-timing-function: linear;
-
-    transform: translateZ(2rem) rotateX(-45deg) rotateY(-45deg); 
-}
-
-@keyframes slow-fade {
-    from { opacity: 0; }
-    to {opacity: 1; }
 }
 
 main p {
@@ -181,4 +107,13 @@ p a {
 #wrapper img {
     border-radius: 1em;
     box-shadow: 0.5em 0.5em 1em rgb(10,10,10);
+}
+
+footer {
+    padding-bottom: 2px;
+    padding-right: 5%;
+    padding-left: 1%;
+    background: rgba(17, 17, 17, 0.5) !important;
+    text-align: center;
+    color: azure;
 }
